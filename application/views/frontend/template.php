@@ -46,7 +46,7 @@
 <!--CSS skin-->
 <link rel="stylesheet" href="<?=$dir_css?>skin.css" media="screen" />
 <!--CSS skin-single-blog-->
-<link rel="stylesheet" href="css/skin-single-blog.css" media="screen" />
+<link rel="stylesheet" href="<?=$dir_css?>skin-single-blog.css" media="screen" />
 <!--slide-iview-->
 <link rel="stylesheet" href="<?=$dir_css?>iview.css" media="screen" />
 <!--style-iview-->
