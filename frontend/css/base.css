@@ -940,3 +940,6 @@ textarea {
 .tbArticle .akt{
 	background:#eee;
 }
+.tbArticle tr:hover{
+	background:#dfdfdf;
+}

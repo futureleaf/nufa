@@ -25,8 +25,8 @@
 					<td>2013-08-15</td>
 					<td>
 					<a href="#" class="btn btn-success" title="Detail"><i class="icon-zoom-in icon-white"></i></a> 
-					<a href="#" class="btn btn-info" title="Edit"><i class="icon-zoom-in icon-white"></i></a> 
-					<a href="#" class="btn btn-danger" title="Delete"><i class="icon-zoom-in icon-white"></i></a></td>
+					<a href="#" class="btn btn-info" title="Edit"><i class="icon-pencil icon-white"></i></a> 
+					<a href="#" class="btn btn-danger" title="Delete"><i class="icon-trash icon-white"></i></a></td>
 				</tr>
 				<tr class='akt'>
 					<td>1</td>
@@ -36,8 +36,8 @@
 					<td>2013-08-15</td>
 					<td>
 					<a href="#" class="btn btn-success" title="Detail"><i class="icon-zoom-in icon-white"></i></a> 
-					<a href="#" class="btn btn-info" title="Edit"><i class="icon-zoom-in icon-white"></i></a> 
-					<a href="#" class="btn btn-danger" title="Delete"><i class="icon-zoom-in icon-white"></i></a></td>
+					<a href="#" class="btn btn-info" title="Edit"><i class="icon-pencil icon-white"></i></a> 
+					<a href="#" class="btn btn-danger" title="Delete"><i class="icon-trash icon-white"></i></a></td>
 				</tr>
 			</table>
 		</article>
