@@ -24,9 +24,19 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>frontend/css/assetsLogin/css/layout.css">
 	
 </head>
+<style>
+.notice p{
+	margin:10px 10px !important;
+	float:left !important;
+}
+</style>
 <body>
 	<div class="notice">
-		<p class="warn"><?php if(form_error('email') != null) echo form_error('email'); ?><?php if(form_error('password') != null) echo form_error('password'); ?></p>
+		<p class="warn">
+		<?php 
+			if(form_error('email') != null) echo form_error('email')." ";
+			if(form_error('password') != null) echo form_error('password'); ?>
+		</p>
 	</div>
 
 
@@ -37,8 +47,8 @@
 		<div class="form-bg">
 			<form action="" method="post" name="ajaxcontactform" id="ajaxcontactform">
 				<h2>Login</h2>
-				<p><input type="text" placeholder="Username" value='<?php echo (set_value('email'))?set_value('email'):""; ?>'></p>
-				<p><input type="password" placeholder="Password" value=''></p>
+				<p><input name='email' type="text" placeholder="email" value='<?php echo (set_value('email'))?set_value('email'):""; ?>'></p>
+				<p><input name='password' type="password" placeholder="password" value=''></p>
 				<button name='do' type="submit"></button>
 			<form>
 		</div>
