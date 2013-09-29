@@ -1,0 +1,79 @@
+p {
+	color: rgb(153,153,153);
+	line-height: 18px
+}
+.main_container {
+	width: 960px;
+	margin: 0 auto;
+}
+.notification {
+	line-height: 20px;
+	cursor: pointer;
+	clear: both;
+	height: 20px;
+	margin: 30px auto 30px auto;
+	padding: 10px 25px 10px 60px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	width: 853px;
+}
+.notification strong {
+	margin-right: 5px;
+}
+.notification p {
+	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
+	color: #333333;
+}
+.message p {
+	font-size: 11px;
+}
+.warning {
+	background-image:url(../images/images-notifications/error.html);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 1px solid #FFC237;
+	background-color: #FFEAA8;
+	color: #826200;
+}
+.success {
+	background-image:url(../images/images-notifications/accept.html);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 1px solid #99C600;
+	background-color: #EFFFB9;
+	color: #3C5A01;
+}
+.failure {
+	background-image:url(../images/images-notifications/exclamation.html);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 1px solid #EB5339;
+	background-color: #FCCAC2;
+	color: #AC260F;
+}
+.information {
+	background-image:url(../images/images-notifications/information.html);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 1px solid #418ACC;
+	background-color: #D0E4F4;
+	color: #235685;
+}
+.lightbulb {
+	background-image:url(../images/images-notifications/lightbulb.html);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 2px solid #D3A350;
+	background-color: #FEF0CB;
+	color: #835F21;
+}
+.messages {
+	background-image:url(../images/images-notifications/email.html);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 2px solid #42B4FF;
+	background-color: #9DDFFF;
+	color: #835F21;
+}

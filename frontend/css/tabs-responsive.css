@@ -1,0 +1,112 @@
+@charset "utf-8";
+/* CSS Document */
+
+#wrapper-tabs-responsive {
+	width: 940px;
+	margin: 50px auto 0 auto;
+	clear: both;
+	display: block;
+	position: relative;
+}
+
+ul.tabs-responsive {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	float: left;
+	list-style: none;
+	height: 30px;
+	border-bottom: 1px solid rgb(220,220,220);
+	border-left: 1px solid rgb(220,220,220);
+}
+ul.tabs-responsive li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	height: 29px;
+	line-height: 29px;
+	border: 1px solid rgb(220,220,220);
+	border-left: none;
+	margin-bottom: -1px;
+	overflow: hidden;
+	position: relative;
+	background-color: rgb(240,240,240);
+}
+ul.tabs-responsive li a {
+	padding: 0 20px;
+	display: block;
+	color: rgb(0,0,0);
+	font-size: 14px;
+	text-decoration: none;
+	border: 1px solid #fff; /* per dare l'effetto smusso all'interni dei Tabs */
+	outline: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+ul.tabs-responsive li a:hover {
+	-webkit-transition-delay:0;
+	-moz-transition-delay:0;
+	-o-transition-delay:0;
+	transition-delay:0;
+}
+ul.tabs-responsive li.active, ul.tabs-responsive li.active  { 
+    background: #fff;
+    border-bottom: 1px solid #fff;
+	border-top:3px solid rgb(134,196,64);
+}
+ 
+/* Contenuto */
+.container-tabs-responsive {
+	background: #fff;
+	border: 1px solid rgb(220,220,220);
+	border-top: none;
+	overflow: hidden;
+	clear: both;
+	float: left;
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+#sheet1,
+#sheet2,
+#sheet3 {
+	padding:20px 12px;
+}
+
+#sheet1 h2,
+#sheet2 h2,
+#sheet3 h2 {
+    margin: 0;
+    margin-bottom: 14px;
+    padding: 0;
+	font-size:18px;
+	font-family:'PT Sans', Arial, Helvetica, sans-serif;
+	color:rgb(0,0,0);
+}
+
+#sheet1 img,
+#sheet2 img,
+#sheet3 img {
+	float:left;
+	margin-right:12px;
+}
+
+#sheet1 p,
+#sheet2 p,
+#sheet3 p {
+	font-size:13px;
+	font-family:'PT Sans', Arial, Helvetica, sans-serif;
+	line-height:23px;
+	color:rgb(102,102,102);
+	text-align:left;
+}
+#sheet1 a,
+#sheet2 a,
+#sheet3 a {
+	color:rgb(0,0,0);
+	text-decoration:none;
+	font-style:italic;
+	font-weight: bold;
+}

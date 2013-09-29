@@ -1,0 +1,137 @@
+/*
+	Author:	Munawar Ahmed Mohammed
+	Website:	www.mobifreaks.com
+	Demo URI:	http://www.mobifreaks.com/u/6
+	Article URI:	http://www.mobifreaks.com/u/5
+*/
+	
+
+/* seo friendly tables */
+
+.container-table,
+.container-table-2,
+.container-table-item,
+.container-table-item-right {
+	width:100%;
+	max-width:940px;
+	margin:30px auto 50px auto;
+	clear:both;
+}
+.container-table-2 {
+	max-width:460px;
+	margin:10px 0 30px 20px;
+}
+.container-table-item {
+	margin:50px 0 0 0;
+	max-width:650px;
+}
+.container-table-item-right {
+	margin:50px 0 0 0;
+	max-width:650px;
+}
+.table {
+	display:table;	/* Defines a Table */
+	font-family:'PT Sans', Arial, Helvetica, sans-serif;
+	font-size:14px;
+	border-bottom:2px solid #dddddd;
+	color:rgb(51,51,51);
+	margin: 0;
+	width:100%;
+}
+.table a {
+	text-decoration:none;
+	color:rgb(134,196,64);
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.table a:hover {
+	color:rgb(0,0,0);
+	-webkit-transition-delay:0;
+	-moz-transition-delay:0;
+	-o-transition-delay:0;
+	transition-delay:0;
+}
+.table-head{
+	 display: table-header-group; /* Defines a table header group */
+}
+.table-head .column{ /* Column inside the table-head */
+	background:rgb(204,204,204);
+	color:rgb(255,255,255);
+	border-right:1px solid rgb(153,153,153);
+	border-bottom:none;
+}
+.table-head .column:hover{ /* Column hover inside the table-head */
+	background:#222222;
+}
+.row{
+	display:table-row; /* Defines a table row */
+}
+.row .column:nth-child(1){ /* First column in a row */
+	border-left:1px solid #eeeeee;
+}
+.row:last-child .column{  /* column in a last row */
+	border-bottom:none;
+}
+.column{
+	display:table-cell; /* Defines a table cell */
+	padding:10px 10px;
+	border-bottom:1px solid #eeeeee;
+	border-right:1px solid #eeeeee;
+}
+.column:hover{
+	background:rgba(134,196,64,0.4);
+}
+.container-table-item h2,
+.container-table-item-right h2  {
+	font-size:18px;
+	color:rgb(102,102,102);
+	text-align:left;
+	margin:85px 0 15px 0;
+}
+.btn-dark-grey {
+	border:1px solid rgb(0,0,0);
+	background-color:rgb(51,51,51);
+	color:rgb(255,255,255);
+}
+/* Responsive table */
+@media all and (max-width: 640px){
+	.table
+	.row,
+	.column,
+	.column:before{
+		display:block;	/* Converts a table, table row, table column and table column:before into a block element */
+	}
+	.table
+	.row .column:last-child{
+		border-bottom:none;
+	}
+	.table-head{
+		position:absolute;	/* Hides table head but not using display none */
+		top:-1000em;
+		left:-1000em;
+	}
+	.row{
+		border:1px solid #eeeeee;
+		border-top:2px solid #dddddd;
+		border-bottom:2px solid #dddddd;
+		margin:20px 0;
+	}
+	.row .column:nth-child(1){ /* first column of the row */
+		border-left:none;
+	}
+	.row .column:last-child{ /* last column of the row */
+		border-right:none;
+	}
+	.row:last-child .column,
+	.column{ /* Column in the last row and column */
+		border-bottom:1px solid #eeeeee;
+	}
+	.column:before{ /* prints the value of data-label attribute before the column data */
+		font-weight:bold;
+		padding-right:20px;
+		font-size:12px;
+		content:" "attr(data-label)" //";	/* call the attribute value of data-label and adds a string // */
+	}
+}

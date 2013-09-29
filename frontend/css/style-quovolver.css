@@ -1,0 +1,113 @@
+/* Quovolver Demo Styles */
+
+/*
+ |	All required styles for the effect
+ |	are labeled with this *required*
+*/
+
+blockquote p { font-size:12px;margin-bottom: 10px; font-style: italic; }
+blockquote cite {
+	background:url(../images/user_12x16.png) no-repeat 0% 50%;
+	margin-top:20px;
+	font-style: normal;
+	display: block;
+	text-align: right;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+}
+
+/*
+ |	Setting the width for the blockquotes is required
+ |	to accurately adjust it's contianer
+*/
+
+blockquote {
+	font-family: 'PT Sans', Arial, Helvetica, sans-serif;
+	width: 220px; /* required */
+	margin:0 auto;
+	}
+	
+/*
+ |	The #quote_wrap div is created
+ |	by Quovolver to wrap the quotes
+*/
+
+#quote_wrap {
+	margin-top:15px;
+	padding: 20px;
+	background:#f9f9f9;
+}
+
+
+/*quovolver-two/quovolver-three*/
+
+#quovolver-two {
+	width:900px;
+	margin:0 30px 60px 30px;
+	clear:both;
+}
+#quovolver-three {
+	width:100%;
+	clear:both;
+	border-top: 1px solid rgb(232,232,232);
+	background-color: rgb(244,244,244);
+}
+
+.block-two p,
+.block-three p,
+.block-woman p {
+	font-size:13px;
+	margin-bottom: 5px;
+	font-style: italic;
+	padding-left:20px;
+	background:url(../images/left_quote_alt_12x9.png);
+	background-repeat:no-repeat;
+}
+
+.block-two cite,
+.block-three cite,
+.block-woman cite {
+	background:url(../images/user-2.png) no-repeat 80% 50%;
+	margin-top:10px;
+	font-style: normal;
+	display: block;
+	text-align: right;
+	font-size: 12px;
+	letter-spacing: 1px;
+	font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
+	line-height:40px;
+}
+.block-woman cite {
+	background:url(../images/user-woman.png) no-repeat 80% 50%;
+}
+
+/*
+ |	Setting the width for the blockquotes is required
+ |	to accurately adjust it's contianer
+*/
+
+.block-two,
+.block-three,
+.block-woman {
+	font-family:'PT Sans', Arial, Helvetica, sans-serif;
+	width: 860px; /* required */
+	margin:0 auto;
+	}
+.block-three,
+.block-woman {
+	width:960px;
+}
+	
+/*
+ |	The #quote_wrap div is created
+ |	by Quovolver to wrap the quotes
+*/
+
+#quote_wrap_2,
+#quote_wrap_3 {
+	margin-top:15px;
+	padding: 5px;
+}
