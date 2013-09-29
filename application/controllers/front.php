@@ -1079,6 +1079,78 @@ class Front extends CI_Controller {
 		}
 		$this->template->frontendCHTRF('content/common/'.$display, $data);
 	}
+	public function createArticle() {
+		// path directory
+		$data['dir'] = $this->get_dir();
+		$data['dir_js'] = $this->get_dir_js();
+		$data['dir_css'] = $this->get_dir_css();
+		$data['dir_images'] = $this->get_dir_images();
+		$data['dir_images_thumbs'] = $this->get_dir_images_thumbs();
+		$data['dir_uploads_thumbs'] = $this->get_dir_uploads_thumbs();
+		$data['dir_uploads'] = $this->get_upload_path();
+		// common data
+		$data['controller'] = "front";
+		$data['url_suffix'] = ".do";
+		$data['id_content'] = $this->uri->segment(3);
+		$data['filter'] = $this->uri->segment(4);
+		$data['thumb_image'] = "$data[dir_uploads]/thumbs/thumb_";
+		$data['image'] = "$data[dir_uploads]/";
+		// data view
+		$data['_menu'] = $this->admin;
+		$data['_sub_menu'] = $this->content_management;
+		$data['_title'] = "Fasilitas";
+		$data['_title_content'] = "Daftar " . $data['_title'];
+		$data['_org'] = "SMPIT Nurul Fajar";
+		$display = "articles";
+		// get data view
+		$dataRecord['id_user'] = $this->input->post("id_user");
+		$dataRecord['id_content'] = $this->input->post("id_content");
+		$dataRecord['author_comment'] = $this->input->post("author_comment");
+		$dataRecord['email_comment'] = $this->input->post("email_comment");
+		$dataRecord['desc_comment'] = $this->input->post("desc_comment");
+		$dataRecord['parent_comment'] = $this->uri->segment(4);
+		if($dataRecord['parent_comment'] == null) $dataRecord['parent_comment'] = "0";
+		// database
+		$this->mdl_review->save($this->method->month_year(), 2);
+		$data['our_contacts'] = $this->mdl_comment->rcomment_records(2)->result();
+		$data['sliders'] = $this->mdl_picture->zero_true_records()->result();
+		$data['historys'] = $this->mdl_content->history_records()->result();
+		$data['visionAndMissions'] = $this->mdl_content->visionAndMission_records()->result();
+		$data['events'] = $this->mdl_content->event_records()->result();
+		$data['aspirations'] = $this->mdl_comment->aspiration_records(1)->result();
+		$data['diamondWords'] = $this->mdl_comment->diamondWord_records(1)->result();
+		$data['newses'] = $this->mdl_content->news_records()->result();
+		$data['articles'] = $this->mdl_content->article_records()->result();
+		$data['archieve_all_records'] = $this->mdl_content->archieve_all_records()->result();
+		$data['right_special_records'] = $this->mdl_content->filter_all_records($this->uri->segment(2))->result();
+		$data['all_contents'] = $this->mdl_content->all_records(0,7)->result();
+		if($data['id_content'] != null && $data['filter'] != null && strlen($data['filter']) == 7) {
+			$data['articles'] = $this->mdl_content->filter_all_records($this->uri->segment(2), $this->uri->segment(4))->result();
+		}
+		else if($data['id_content'] != null) {
+			$display = "articlesRead";
+			$data['articles_nps'] = $this->mdl_content->article_records()->result();
+			$data['articles'] = $this->mdl_content->article_record($data['id_content'])->result();
+			foreach($data['articles'] as $title):$data['_title'] = $title->name_content;endforeach;
+			$data['comments'] = $this->mdl_comment->id_content_records($data['id_content'])->result();
+			$data['count_comments'] = $this->mdl_comment->count_id_content_records($data['id_content']);
+		}
+		$this->form_validation->set_rules('author_comment', 'Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
+		$this->form_validation->set_rules('email_comment', 'Email', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email');
+		$this->form_validation->set_rules('desc_comment', 'Description', 'trim|required|max_length[10000]|xss_clean|');
+		if(isset($_POST['do'])) {
+			if($this->form_validation->run() == TRUE) {
+				$this->mdl_comment->save($dataRecord, 10);
+				redirect("$data[controller]/articles/$dataRecord[id_content]");
+			}
+		}
+		if(isset($_GET['search'])) {
+			$data['articles'] = $this->mdl_content->filter_all_records($this->uri->segment(2),$_GET['search'])->result();
+		}
+		$this->template->frontendCHTRF('content/article/'.$display, $data);
+	}
+
+	
 	// basic directory
 	public function get_dir() {
 		return base_url()."frontend/";

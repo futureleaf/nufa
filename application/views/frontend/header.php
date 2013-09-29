@@ -54,16 +54,16 @@
             </ul>
           </li>
           <li><span class="div-nav">&nbsp;</span></li>
-	  <li><?php echo anchor("$controller/organization","Organisasi", array("title"=>"Organisasi")); ?></li>
-          <li><span class="div-nav">&nbsp;</span></li>
-	  <li><?php echo anchor("$controller/gallery","Gallery Foto", array("title"=>"Gallery Foto")); ?></li>
-          <li><span class="div-nav">&nbsp;</span></li>
-	  <li><?php echo anchor("$controller/contact","Kontak", array("title"=>"Kontak")); ?></li>
-	  <li><?php echo anchor("$controller/createArtikel","Buat Artikel", array("title"=>"Buat Artikel")); ?></li>
+		  <li><?php echo anchor("$controller/organization","Organisasi", array("title"=>"Organisasi")); ?></li>
+			  <li><span class="div-nav">&nbsp;</span></li>
+		  <li><?php echo anchor("$controller/gallery","Gallery Foto", array("title"=>"Gallery Foto")); ?></li>
+			  <li><span class="div-nav">&nbsp;</span></li>
+		  <li><?php echo anchor("$controller/contact","Kontak", array("title"=>"Kontak")); ?></li>
           <li><span class="div-nav">&nbsp;</span></li>
           <?php if($this->session->userdata('is_login_front') == FALSE) { ?>
           <li><?php echo anchor("$controller/login","Masuk", array("title"=>"Masuk")); ?></li>
 	  <?php } else {?>
+		  <li><?php echo anchor("$controller/createArticle","Buat Artikel", array("title"=>"Buat Artikel")); ?></li>
           <li><a href="#" title="Account">Account</a>
             <ul>
 	      <li><?php echo anchor("$controller/updatePassword","Update Password", array("title"=>"Update Password")); ?></li>
