@@ -25,19 +25,24 @@
 	
 </head>
 <style>
+.notice{
+	height:auto !important;
+}
 .notice p{
-	margin:10px 10px !important;
-	float:left !important;
+	text-align:center;
 }
 </style>
 <body>
+<?php if(form_error('email') != null || form_error('password') != null){?>
 	<div class="notice">
-		<p class="warn">
+		<a href='' id='btn' class="close">close</a>
+		<center><p class="warn">
 		<?php 
 			if(form_error('email') != null) echo form_error('email')." ";
 			if(form_error('password') != null) echo form_error('password'); ?>
-		</p>
+		</p></center>
 	</div>
+<?php } ?>
 
 
 	<!-- Primary Page Layout -->
@@ -59,6 +64,13 @@
 	<!-- JS  -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
 	<script>window.jQuery || document.write("<script src='js/jquery-1.5.1.min.js'>\x3C/script>")</script>
+<script>
+$(function(){
+	$('.close').click(function(){
+		$('.notice').hide();
+	});
+});
+</script>
 	<script src="js/app.js"></script>
 	
 <!-- End Document -->
