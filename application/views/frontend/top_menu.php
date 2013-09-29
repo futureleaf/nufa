@@ -3,7 +3,7 @@
                         
         <div id="quovolver-three" style="margin:-0% 0% 0%;text-align:center;"><!--beginning quovolver-->
 		 <div style="margin-left:10%"><br/>
-			<blockquote class="block-three">
+			<blockquote style='width:80%' class="block-three">
 				<script type="text/javascript">
 
 				/***********************************************
@@ -23,14 +23,14 @@
 
 				begintag=''; //set opening tag, such as font declarationsbegintag=''; //set opening tag, such as font declarations
 				<?php $i=0;foreach($diamondWords as $diamondWord): ?>
-				fcontent[<?php echo $i++; ?>]="<p style=\"font-size:120%;margin-left:10%\"><?php echo $diamondWord->desc_comment;?></p>";
+				fcontent[<?php echo $i++; ?>]="<p style=\"line-height:24px;font-size:120%;margin-left:0%\"><?php echo $diamondWord->desc_comment;?></p>";
 				<?php endforeach; ?>
 				closetag='';
 		
 			
 
-				var fwidth='700px'; //set scroller width
-				var fheight='60px'; //set scroller height
+				var fwidth='80%'; //set scroller width
+				var fheight='auto'; //set scroller height
 
 				var fadelinks=1;  //should links inside scroller content also fade like text? 0 for no, 1 for yes.
 
@@ -104,7 +104,7 @@
 				}
 
 				if (ie4||DOM2)
-				  document.write('<div id="fscroller" style="width:'+fwidth+';height:'+fheight+'"></div>');
+				  document.write('<div id="fscroller" style="min-height:60px;width:'+fwidth+';height:'+fheight+'"></div>');
 
 				if (window.addEventListener)
 				window.addEventListener("load", changecontent, false)

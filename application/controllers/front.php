@@ -90,7 +90,7 @@ class Front extends CI_Controller {
 				redirect("$data[controller]/index");
 			}
 		}
-		$this->template->frontendContentOnly('content/common/login', $data);
+		$this->load->view('frontend/content/common/login', $data);
 	}
 	
 	public function logout() {
