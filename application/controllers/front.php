@@ -1079,6 +1079,7 @@ class Front extends CI_Controller {
 		}
 		$this->template->frontendCHTRF('content/common/'.$display, $data);
 	}
+	
 	public function createArticle() {
 		// path directory
 		$data['dir'] = $this->get_dir();
@@ -1120,7 +1121,7 @@ class Front extends CI_Controller {
 		$data['aspirations'] = $this->mdl_comment->aspiration_records(1)->result();
 		$data['diamondWords'] = $this->mdl_comment->diamondWord_records(1)->result();
 		$data['newses'] = $this->mdl_content->news_records()->result();
-		$data['articles'] = $this->mdl_content->article_records()->result();
+		$data['articles'] = $this->mdl_content->article_user_records($this->session->userdata('id_user_front'))->result();
 		$data['archieve_all_records'] = $this->mdl_content->archieve_all_records()->result();
 		$data['right_special_records'] = $this->mdl_content->filter_all_records($this->uri->segment(2))->result();
 		$data['all_contents'] = $this->mdl_content->all_records(0,7)->result();
@@ -1147,6 +1148,110 @@ class Front extends CI_Controller {
 		if(isset($_GET['search'])) {
 			$data['articles'] = $this->mdl_content->filter_all_records($this->uri->segment(2),$_GET['search'])->result();
 		}
+		if($dataRecord['parent_comment'] == null) $dataRecord['parent_comment'] = "0";
+		// create article
+		if($this->uri->segment(3) == "create") {
+			$data['_title_content'] = "Buat " . $data['_title'];
+			$display = "articleCreate";
+			// validation article
+			$this->form_validation->set_rules('name_content', 'article Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
+			$this->form_validation->set_rules('desc_content', 'Description', 'trim|required|min_length[20]|xss_clean|');
+			if(isset($_POST['doCreate'])) {
+				$dataUploads = $this->mdl_function->do_upload();
+				$data['errorImage'] = $dataUploads['error'];
+				$dataRecord['picture_content'] = $dataUploads['file_name'];
+				if($this->form_validation->run() == TRUE && $data['errorImage'] == null) {
+					$this->mdl_content->article_save($dataRecord);
+					redirect("admin/article");
+				}
+				else $this->method->deleteUserPicture($dataRecord['picture_content']);
+			}
+		}
+		// update article
+		else if($this->uri->segment(3) == "update" && $this->uri->segment(4) != null) {
+			$data['_title_content'] = "Perbaharui " . $data['_title'];
+			$display = "articleUpdate";
+			$data['article_update'] = $this->mdl_content->article_record($data['id_content'])->result();
+			$newPicture = "";
+			foreach($data["article_update"] as $article_update) {
+				$oldPicture = $article_update->picture_content;
+				$dataRecord['picture_content'] = $article_update->picture_content;
+			}
+			// validation article
+			$this->form_validation->set_rules('name_content', 'article Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
+			$this->form_validation->set_rules('desc_content', 'Description', 'trim|required|min_length[20]|xss_clean|');
+			if(isset($_POST['doUpdate'])) {
+				// image
+				if(isset($_POST['change_photo'])) {
+					$dataUploads = $this->mdl_function->do_upload(200, 200);
+					$data['errorImage'] = $dataUploads['error'];
+					$newPicture = $dataUploads['file_name'];
+					
+		$data['uploads'] = $this->get_upload_path();$dataRecord['picture_content'] = $dataUploads['file_name'];
+				}
+				if($this->form_validation->run() == TRUE && $data['errorImage'] == null) {
+					if(isset($_POST['change_photo'])) $this->method->deleteUserPicture($oldPicture);
+					$this->mdl_content->article_update($dataRecord);
+					redirect("admin/article");
+				}
+				else $this->method->deleteUserPicture($newPicture);
+			}
+		}
+		// comment create article
+		else if($this->uri->segment(3) == "commentCreate" && $this->uri->segment(4) != null) {
+			$data['_title_content'] = "Buat Komentar " . $data['_title'];
+			$display = "articleCommentCreate";
+			$data['article_update'] = $this->mdl_content->article_record($data['id_content'])->result();
+			$this->form_validation->set_rules('author_comment', 'Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
+			$this->form_validation->set_rules('email_comment', 'Email', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email');
+			$this->form_validation->set_rules('desc_comment', 'Description', 'trim|required|xss_clean|');
+			if(isset($_POST['doCreate'])) {
+				if($this->form_validation->run() == TRUE) {
+					$this->mdl_comment->save($dataRecord, 8);
+					redirect("admin/article/view/$dataRecord[id_content]");
+				}
+			}
+		}
+		// comment update article
+		else if($this->uri->segment(3) == "commentUpdate" && $this->uri->segment(4) != null && $this->uri->segment(5) != null) {
+			$data['_title_content'] = "Perbaharui Komentar " . $data['_title'];
+			$display = "articleCommentUpdate";
+			$data['article_update'] = $this->mdl_content->article_record($data['id_content'])->result();
+			$data['comments'] = $this->mdl_comment->record($dataRecord['id_comment'])->result();
+			$this->form_validation->set_rules('author_comment', 'Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
+			$this->form_validation->set_rules('email_comment', 'Email', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email');
+			$this->form_validation->set_rules('desc_comment', 'Description', 'trim|required|xss_clean|');
+			if(isset($_POST['doCreate'])) {
+				if($this->form_validation->run() == TRUE) {
+					$this->mdl_comment->update($dataRecord);
+					redirect("admin/article/view/$dataRecord[id_content]");
+				}
+			}
+		}
+		// comment delete article
+		else if($this->uri->segment(3) == "commentDelete" && $this->uri->segment(4) != null && $this->uri->segment(5) != null) {
+			$this->mdl_comment->delete($data['id_comment']);
+			redirect("admin/article/view/$dataRecord[id_content]");
+		}
+		else if($this->uri->segment(3) == "view" && $this->uri->segment(4) != null) {
+			$data['_title_content'] = "Detail " . $data['_title'];
+			$display = "articleDetail";
+			$data['articlees'] = $this->mdl_content->article_record($data['id_content'])->result();
+			$data['comments'] = $this->mdl_comment->id_content_records($data['id_content'])->result();
+		}
+		else if($this->uri->segment(3) == "toogle" && $this->uri->segment(4) != null && $this->uri->segment(5) != null) {
+			$status = $this->uri->segment(5);
+			$this->mdl_content->toogle_is_acontent($dataRecord['id_content'], $status);
+			redirect("admin/article");
+		}
+		// delete article
+		else if($this->uri->segment(3) == "delete" && $this->uri->segment(4) != null) {
+			$data['content_record'] = $this->mdl_content->article_record($data['id_content'])->result();
+			foreach($data['content_record'] as $content) $this->method->deleteUserPicture($content->picture_content);
+			$this->mdl_content->article_delete($data['id_content']);
+			redirect("admin/article");
+		}
+		
 		$this->template->frontendCHTRF('content/article/'.$display, $data);
 	}
 

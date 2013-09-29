@@ -9,7 +9,6 @@
 			<article class="item-content-blog"><!--beginning item-content-blog--> 
 		  
 	      
-		  
 				<div class="holder" style="float:right"></div><br/><br/><br/><br/>
 				<!--///////////////////////////////BEGINNING POST WITH PHOTO//////////////////////////////////////-->
 				<ul id="itemContainer">

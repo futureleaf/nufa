@@ -229,6 +229,21 @@ class Mdl_Content extends CI_Model {
 			ORDER BY ct.cd_content desc
 		");
 	}
+	
+	// article user
+	function article_user_records($id_user=0) {
+		return $this->db->query("
+			SELECT ct.*, rct.*, tct.*, usr.* 
+			FROM content ct 
+			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
+			LEFT JOIN tcontent tct ON ct.id_tcontent = tct.id_tcontent
+			LEFT JOIN user usr ON ct.id_user = usr.id_user
+			WHERE rct.id_rcontent = 2
+			AND ct.id_user = $id_user
+			ORDER BY ct.cd_content desc
+		");
+	}
+	
 	function count_article_records($month_year) {
 		$this->db->where('id_rcontent =', 2);
 		$this->db->like('cd_content', $month_year, 'after'); 
