@@ -46,7 +46,11 @@
 	      <li><?php echo anchor("$controller/notifications","Pengumuman", array("title"=>"Pengumuman")); ?></li>
 	      <li><?php echo anchor("$controller/newses","Berita Sekolah", array("title"=>"Berita Sekolah")); ?></li>
 	      <li><?php echo anchor("$controller/events","Kegiatan", array("title"=>"Kegiatan")); ?></li>
-	      <li><?php echo anchor("$controller/articles","Artikel", array("title"=>"Artikel")); ?></li>
+	      <li><?php echo anchor("$controller/articles","Artikel", array("title"=>"Artikel")); ?>
+			  <ul>
+				<li><?php echo anchor("$controller/archieves","Islami", array("title"=>"Islami")); ?></li>
+			  </ul>
+		  </li>
 	      <li><?php echo anchor("$controller/facilitys","Fasilitas", array("title"=>"Fasilitas")); ?></li>
 	      <li><?php echo anchor("$controller/achievements","Prestasi", array("title"=>"Prestasi")); ?></li>
           </ul>
