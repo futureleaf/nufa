@@ -8,6 +8,11 @@
 		<!--|||||||||||||||||||||||BEGINNING ITEM-CONTENT-BLOG|||||||||||||||||||||||||||-->
 		
 		<article class="item-content-blog"><!--beginning item-content-blog--> 
+		
+		<button class="btn btn-large btn-primary">
+			<i class="icon-edit icon-white"></i> Buat Artikel
+		</button> <br><br>
+		
 			<table border='1' class='tbArticle'>
 				<tr>
 					<th>No</th>
