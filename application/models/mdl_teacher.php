@@ -30,7 +30,6 @@ class mdl_teacher extends CI_Model {
 		return $this->db->query("
 			SELECT rusr.* FROM ruser rusr
 			WHERE rusr.id_ruser != 1
-			AND rusr.id_ruser != 2
 			AND rusr.id_ruser != 4
 			AND rusr.id_ruser != 5
 			
@@ -119,6 +118,14 @@ class mdl_teacher extends CI_Model {
 						AND (user.id_ruser = 3 OR user.id_ruser = 2 OR user.id_ruser = 6 OR user.id_ruser = 7 OR user.id_ruser = 8);
 						");
 			$result = "id_class = $data_record[id_class],";
+		}
+		if($data_record['id_ruser'] == "2") {
+			$this->db->query("UPDATE user SET
+						id_ruser = 3
+						WHERE id_ruser = $data_record[id_ruser]
+						AND (user.id_ruser = 3 OR user.id_ruser = 2 OR user.id_ruser = 6 OR user.id_ruser = 7 OR user.id_ruser = 8);
+						");
+			$result .= "id_ruser = $data_record[id_ruser],";
 		}
 		$this->db->query("UPDATE user SET 
 						is_auser=1, 

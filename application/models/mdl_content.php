@@ -65,7 +65,7 @@ class Mdl_Content extends CI_Model {
 			OR rct.id_rcontent = 4 
 			OR rct.id_rcontent = 5 
 			OR rct.id_rcontent = 6 
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 			$result
 		;");
 	}
@@ -149,7 +149,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 1
 			$result
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		;");
 	}
 	
@@ -226,7 +226,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN tcontent tct ON ct.id_tcontent = tct.id_tcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 2
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		");
 	}
 	
@@ -238,9 +238,8 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN tcontent tct ON ct.id_tcontent = tct.id_tcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
-			WHERE rct.id_rcontent = 2
-			AND ct.id_user = $id_user
-			ORDER BY ct.cd_content desc
+			WHERE ct.id_user = $id_user
+			ORDER BY ct.id_content desc
 		");
 	}
 	
@@ -263,11 +262,43 @@ class Mdl_Content extends CI_Model {
 		;");
 	}
 	
+	function post_record($id){
+		return $this->db->query("
+			SELECT ct.*, rct.*, tct.*, usr.* 
+			FROM content ct 
+			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
+			LEFT JOIN tcontent tct ON ct.id_tcontent = tct.id_tcontent
+			LEFT JOIN user usr ON ct.id_user = usr.id_user
+			WHERE id_content=$id
+		;");
+	}
+	
+	function rpost_records(){
+		return $this->db->query("
+			SELECT rct.*
+			FROM rcontent rct 
+			WHERE rct.id_rcontent = 1
+			OR rct.id_rcontent = 2
+			OR rct.id_rcontent = 3
+			OR rct.id_rcontent = 4
+			OR rct.id_rcontent = 5
+			OR rct.id_rcontent = 6
+		;");
+	}
+	
 	function article_save($dataRecord){
+		$result = "";
+		if(isset($dataRecord['id_rcontent']) || $dataRecord['id_rcontent'] != null) {
+			$result = "id_rcontent = $dataRecord[id_rcontent],";
+		}
+		else {
+			$result="id_rcontent = 2,";
+		}
+		$id_user =  $this->session->userdata('id_user_front');
 		$this->db->query("
 			INSERT INTO content SET
-			id_user = $dataRecord[id_user],
-			id_rcontent = 2,
+			id_user = $id_user,
+			$result
 			id_tcontent = $dataRecord[id_tcontent],
 			name_content = ".$this->db->escape($dataRecord['name_content']).",
 			desc_content = ".$this->db->escape($dataRecord['desc_content']).",
@@ -320,7 +351,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 3
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 			$result
 		;");
 	}
@@ -391,7 +422,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 4
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 			$result
 		;");
 	}
@@ -463,7 +494,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 5
 			$result
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		;");
 	}
 	function limit_notification_records($start=0, $after=3) {
@@ -473,7 +504,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 5
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 			LIMIT $start,$after
 		;");
 	}
@@ -542,7 +573,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 6
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		");
 	}
 	function limit_event_records($begin=0, $end=0) {
@@ -554,7 +585,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 6
-			ORDER BY ct.cd_content DESC 
+			ORDER BY ct.id_content desc 
 			$result
 		;");
 	}
@@ -623,7 +654,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 7
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		");
 	}
 	
@@ -668,7 +699,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 8
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		");
 	}
 	
@@ -713,7 +744,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 9
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		");
 	}
 	
@@ -777,7 +808,17 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 10
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content asc
+		");
+	}
+	function link_desc_records() {
+		return $this->db->query("
+			SELECT ct.*, rct.*, usr.* 
+			FROM content ct 
+			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
+			LEFT JOIN user usr ON ct.id_user = usr.id_user
+			WHERE rct.id_rcontent = 10
+			ORDER BY ct.id_content desc
 		");
 	}
 	
@@ -841,7 +882,7 @@ class Mdl_Content extends CI_Model {
 			LEFT JOIN rcontent rct ON ct.id_rcontent = rct.id_rcontent
 			LEFT JOIN user usr ON ct.id_user = usr.id_user
 			WHERE rct.id_rcontent = 11
-			ORDER BY ct.cd_content desc
+			ORDER BY ct.id_content desc
 		");
 	}
 	

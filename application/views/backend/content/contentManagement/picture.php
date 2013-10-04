@@ -34,9 +34,9 @@
 								</a>
 									<?php
 										echo '<br /><br /><center>';
-										echo ($picture->is_apicture == 1)?'<button class="btn btn-mini btn-warning" title="Toogle Active" style="position:absolute;margin:-20% -45%;" onClick="window.location=\'#'.base_url().'admin/picture/toogle/'.$picture->id_content.'/'.$picture->id_picture.'/0\';"><i class="icon-ok-circle"></i></button>':'<button class="btn btn-mini" title="Toogle Active"  style="position:absolute;margin:-20% -45%;onClick="window.location=\'#'.base_url().'admin/picture/toogle/'.$picture->id_content.'/'.$picture->id_picture.'/1\';"><i class="icon-remove-circle"></i></button>'; 
-										echo '<button class="btn btn-mini" title="Perbaharui" style="position:absolute;margin:-20% -13%;" onClick="window.location=\'#'.base_url().'admin/picture/pictureUpdate/'.$picture->id_content.'/'.$picture->id_picture.'\';"><i class="icon-pencil"></i></button>'; 
-										echo '<button onClick=" return deletePicture(\'#'.base_url().'admin/picture/pictureDelete/'.$picture->id_content.'/'.$picture->id_picture.'\')" style="position:absolute;margin:-20% 18%;" class="btn btn-mini pictureDelete" title="Hapus"><i class="icon-trash"></i></button>'; 
+										echo ($picture->is_apicture == 1)?'<button class="btn btn-mini btn-warning" title="Toogle Active" style="position:absolute;margin:-15% -35%;" onClick="window.location=\'#'.base_url().'admin/picture/toogle/'.$picture->id_content.'/'.$picture->id_picture.'/0\';"><i class="icon-ok-circle"></i></button>':'<button class="btn btn-mini" title="Toogle Active" style="position:absolute;margin:-15% -35%;" onClick="window.location=\'#'.base_url().'admin/picture/toogle/'.$picture->id_content.'/'.$picture->id_picture.'/1\';"><i class="icon-remove-circle"></i></button>'; 
+										echo '<button class="btn btn-mini" title="Perbaharui" style="position:absolute;margin:-15% -8%;" onClick="window.location=\'#'.base_url().'admin/picture/pictureUpdate/'.$picture->id_content.'/'.$picture->id_picture.'\';"><i class="icon-pencil"></i></button>'; 
+										echo '<button onClick=" return deletePicture(\'#'.base_url().'admin/picture/pictureDelete/'.$picture->id_content.'/'.$picture->id_picture.'\')" style="position:absolute;margin:-15% 18%;" class="btn btn-mini pictureDelete" title="Hapus"><i class="icon-trash"></i></button>'; 
 										echo '</canter>';
 									?>
 							</li>

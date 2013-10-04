@@ -21,7 +21,7 @@
 
 		<footer>
 			<p class="pull-left">&copy; <?php echo anchor("front/index", "SMPIT Nurul Fajar", array("target"=>"_blank")); ?> </p>
-			<p class="pull-right">Powered by: <a href="http://adisanggoro.sch.id/">SMK Adi Sanggoro's Students</a></p>
+			<p class="pull-right">Powered by: <a href="http://futureleaf.co.id/">futureleaf.co.id</a></p>
 		</footer>
 
 	</div>

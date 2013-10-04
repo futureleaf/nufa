@@ -8,7 +8,7 @@
 									</div>
 								</div>
 								<div class="box-content">
-									<fieldset class="form-horizontal">			
+									<fieldset class="form-horizontal">
 										<?php
 											foreach($articlees as $article) :
 										?>
@@ -27,7 +27,7 @@
 												<div class="control-group">
 													<label class="control-label">Gambar Utama </label>
 													<div class="controls">
-														<p><img src="<?php echo base_url() . $uploads . "/thumbs/thumb_" . $article->picture_content; ?>" /></p>
+														<p><img src="<?php echo $uploads . "/thumbs/thumb_" . $article->picture_content; ?>" /></p>
 													</div>
 												</div>
 												<div class="control-group">

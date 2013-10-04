@@ -11,43 +11,12 @@
       
       <div class="container-iview"><!--beginning slider iview-->
 		<div id="iview">
-			<div data-iview:image="<?=$dir_images?>photo1.jpg">
-				<div class="iview-caption caption1" data-x="200" data-y="100" data-transition="expandDown">
-                <ul class="iview-ul">
-                	<li>Menjadikan Anak Cerdas</li>
-        			<li>Berjiwa Kepemimpinan Seperti Rasulullah</li>
-        			<li>Inofatif</li>
-        			<li>Berwibawa</li>
-                 </ul>
-                 <!--<a href="#" class="btn btn-small btn-dark-grey">Purchase Now</a>-->
-                </div>
+			<?php foreach($pictures as $picture) { ?>
+			<div data-iview:image="<?php echo $dir_uploads; ?>/<?php echo $picture->name_picture; ?>">
+				<div class="iview-caption caption1" data-x="200" data-y="100" data-transition="expandDown"></div>
 			</div>
-
-			<div data-iview:image="<?=$dir_images?>photo2.jpg" data-iview:transition="block-drop-random" data-iview:pausetime="4000">
-
-			<div class="iview-caption caption2" data-x="20" data-y="25" data-transition="expandRight">
-				<h1>With Creative<strong class="iview-strong"> Will Attract More </strong><br>Customers Attention on Your Products</h1><h2>Full Clean & Responsive</h2><p>Lorem ipsum dolor sit amet, <br>consetetur sadipscing elitr, <br>sed diam nonumy eirmod tempor invidunt ut<br> labore et dolore magna aliquyam.</p>
-				</div>
-			</div>
-
-			<div data-iview:image="<?=$dir_images?>photo3.jpg">
-				<div class="iview-caption caption3" data-x="750" data-y="30" data-transition="expandLeft">
-                <ul class="iview-ul-2">
-                	<li>About us page Version 1</li>
-        			<li>About us page Version 2</li>
-        			<li>Portfolio one column</li>
-        			<li>Portfolio two columns</li>
-        			<li>Portfolio three columns</li>
-                 </ul>
-                </div>
-			</div>
-
-			<div data-iview:image="<?=$dir_images?>photo4.jpg">
-            <div class="iview-caption caption4" data-x="700" data-y="200" data-transition="expandLeft">
-            <h1>With Creative<strong class="iview-strong"> Will Attract More </strong><br>Customers Attention on Your Products</h1><h2>Full Clean & Responsive</h2><a href="#" class="btn btn-small btn-dark-grey">Purchase Now</a>
-            </div>
+			<?php } ?>
 		</div>
-	</div>
     
     </div><!--end slider-iview-->
       
@@ -195,14 +164,14 @@
         <?php foreach($historys as $history): ?>
 	<div class="dept-dept-one"> <i class="symbol"><img src="<?=$dir_images?>dial_32x32_green.png" alt=""></i>
 		<h3><?php echo anchor("$controller/history","$history->name_content", array("class"=>"basic-link")); ?></h3>
-		<p><?php echo (strlen($history->desc_content) > 100)?substr($history->desc_content, 0, 100)."...":$history->desc_content;?></p>
+		<p><?php echo (strlen(strip_tags($history->desc_content)) > 100)?substr(strip_tags($history->desc_content), 0, 100)."...":strip_tags($history->desc_content);?></p>
 		<span class="more"><?php echo anchor("$controller/history","Read More"); ?></span>
 	</div>
         <?php endforeach; ?>
         <?php foreach($visionAndMissions as $visionAndMission): ?>
 	<div class="dept-dept-two"> <i class="symbol"><img src="<?=$dir_images?>dial_32x32_green.png" alt=""></i>
 		<h3><?php echo anchor("$controller/visionAndMission","$visionAndMission->name_content", array("class"=>"basic-link")); ?></h3>
-		<p><?php echo (strlen($visionAndMission->desc_content) > 100)?substr($visionAndMission->desc_content, 0, 100)."...":$visionAndMission->desc_content;?></p>
+		<p><?php echo (strlen(strip_tags($visionAndMission->desc_content)) > 100)?substr(strip_tags($visionAndMission->desc_content), 0, 100)."...":strip_tags($visionAndMission->desc_content);?></p>
 		<span class="more"><?php echo anchor("$controller/visionAndMission","Read More"); ?></span>
 	</div>
         <?php endforeach; ?>

@@ -10,7 +10,7 @@
 		  
 	      
 		  
-				<div class="holder" style="float:right"></div><br/><br/><br/><br/>
+				<div class="holder" style="float:right"></div>
 				<!--///////////////////////////////BEGINNING POST WITH PHOTO//////////////////////////////////////-->
 				<ul id="itemContainer">
 				<?php
@@ -26,7 +26,7 @@
 					<li>
 						<div class="photos-blog"><!--beginning photos-blog--> 
 							<!--<a href="<?=$dir_uploads.$archieve->picture_content ?>" rel="prettyPhoto[gallery]" class="image-zoom"><span class="roll-img-blog"></span><img src="<?=$dir_uploads.$archieve->picture_content ?>" style="width:650px;height:300px;" alt=""></a> </div>-->
-							<?php echo anchor("$controller/$link/$archieve->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$archieve->picture_content .'" style="width:650px;height:300px;margin-bottom:20px;" alt="">'); ?>
+							<?php echo anchor("$controller/$link/$archieve->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$archieve->picture_content .'" class="img-content" alt="">'); ?>
 						<div class="intro-text-blog"><!--beginning intro-text-blog-->
 						  
 						  <?php echo anchor("$controller/$link/$archieve->id_content", '<h3 class="title-three-4"><span>'.$archieve->name_content.' </span></h3>'); ?>
@@ -43,7 +43,7 @@
 								</span> 
 							</p>
 						  
-						<p><?php echo (strlen($archieve->desc_content) > 500)?substr($archieve->desc_content, 0, 500):$archieve->desc_content;?>... <?php echo anchor("$controller/$link/$archieve->id_content", "<span>Read More</span>"); ?></p>
+						<p><?php echo (strlen(strip_tags($archieve->desc_content)) > 500)?substr(strip_tags($archieve->desc_content), 0, 500):strip_tags($archieve->desc_content);?>... <?php echo anchor("$controller/$link/$archieve->id_content", "<span>Read More</span>"); ?></p>
 						  
 						<div class="separator-post"></div>  
 						  

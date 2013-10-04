@@ -19,7 +19,7 @@
 			else if($facility->id_rcontent == 6) $link = "facilitys";
 		?>
 		<div class="photos-blog"><!--beginning photos-blog--> 
-			<?php echo anchor("$controller/$link/$facility->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$facility->picture_content .'" style="width:650px;height:300px;" alt="">'); ?>
+			<?php echo anchor("$controller/$link/$facility->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$facility->picture_content .'" class="img-content" alt="">'); ?>
 		</div>
 		<div class="intro-text-blog-single"><!--beginning intro-text-blog-->
 			<?php echo anchor("$controller/$link/$facility->id_content", '<h3 class="title-three-4"><span>'.$facility->name_content.' </span></h3>', array("style"=>"text-decoration:none;")); ?>

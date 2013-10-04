@@ -89,14 +89,19 @@
     
 	<div class="cont-footer-last"><!--beginning footer-last-->
 	<div id="footer-last"><!--beginning footer-last-->
-	  <h5>&copy;2013 - <?php echo date('Y'); ?> Creative. All rights reserved. | <?php echo anchor("$controller/siteMap", "Site Map"); ?></a></h5>
+	  <h5>&copy;2013 - <?php echo date('Y'); ?> SMPIT Nurul Fajar. All rights reserved. | <?php echo anchor("$controller/siteMap", "Site Map"); ?></a></h5>
 	  <ul class="social-content">
-	    <li><a href="#"><img class="social-one" src="<?=$dir_images?>vimeo.png" alt="vimeo"></a></li>
-	    <li><a href="#"><img class="social-two" src="<?=$dir_images?>youtube.png" alt="youtube"></a></li>
-	    <li><a href="#"><img class="social-three" src="<?=$dir_images?>linkedin.png" alt="linkedin"></a></li>
-	    <li><a href="#"><img class="social-four" src="<?=$dir_images?>google.png" alt="google+"></a></li>
-	    <li><a href="#"><img class="social-five" src="<?=$dir_images?>twitter.png" alt="twitter"></a></li>
-	    <li><a href="#"><img class="social-six" src="<?=$dir_images?>facebook.png" alt="facebook"></a></li>
+		<?php
+			$links = $this->mdl_content->link_desc_records()->result();
+			foreach($links as $link):
+			if($link->id_tcontent == 103) echo "<li> <a href='".$link->desc_content."' title='".$link->name_content."' class='tooltip'> <img src='".$dir_images."facebook.png' alt=''> </a> </li>";
+			if($link->id_tcontent == 104) echo "<li> <a href='".$link->desc_content."' title='".$link->name_content."' class='tooltip'> <img src='".$dir_images."twitter.png' alt=''> </a> </li>";
+			if($link->id_tcontent == 105) echo "<li> <a href='".$link->desc_content."' title='".$link->name_content."' class='tooltip'> <img src='".$dir_images."google.png' alt=''> </a> </li>";
+			if($link->id_tcontent == 106) echo "<li> <a href='".$link->desc_content."' title='".$link->name_content."' class='tooltip'> <img src='".$dir_images."linkedin.png' alt=''> </a> </li>";
+			if($link->id_tcontent == 107) echo "<li> <a href='".$link->desc_content."' title='".$link->name_content."' class='tooltip'> <img src='".$dir_images."youtube.png' alt=''> </a> </li>";
+			if($link->id_tcontent == 108) echo "<li> <a href='".$link->desc_content."' title='".$link->name_content."' class='tooltip'> <img src='".$dir_images."vimeo.png' alt=''> </a> </li>";
+		?>
+		 <?php endforeach; ?>
 	  </ul>
 	</div>
 	<!--end footer-last-->

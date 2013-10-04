@@ -846,7 +846,14 @@ a .opa-hover-2-one {
 	position: absolute;
 	width: 470px;
 	z-index: 10;
-}
+	}
+	span.roll-img-blog {
+	//background:url(../images/zoom-img.png) center center no-repeat #000;
+	height: 217px;
+	position: absolute;
+	width: 470px;
+	z-index: 1;
+	}
 	.item-content,
 	.item-content-right,
 	.item-content-blog,

@@ -19,7 +19,7 @@
 			else if($article->id_rcontent == 6) $link = "articles";
 		?>
 		<div class="photos-blog"><!--beginning photos-blog--> 
-			<?php echo anchor("$controller/$link/$article->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$article->picture_content .'" style="width:650px;height:300px;" alt="">'); ?>
+			<?php echo anchor("$controller/$link/$article->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$article->picture_content .'"class="img-content" alt="">'); ?>
 		</div>
 		<div class="intro-text-blog-single"><!--beginning intro-text-blog-->
 			<?php echo anchor("$controller/$link/$article->id_content", '<h3 class="title-three-4"><span>'.$article->name_content.' </span></h3>', array("style"=>"text-decoration:none;")); ?>

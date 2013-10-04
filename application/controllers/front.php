@@ -37,6 +37,86 @@ class Front extends CI_Controller {
 		
 	}
 	
+	public function register() {
+		// path directory
+		$data['dir'] = $this->get_dir();
+		$data['dir_js'] = $this->get_dir_js();
+		$data['dir_css'] = $this->get_dir_css();
+		$data['dir_images'] = $this->get_dir_images();
+		$data['dir_images_thumbs'] = $this->get_dir_images_thumbs();
+		$data['dir_uploads_thumbs'] = $this->get_dir_uploads_thumbs();
+		$data['dir_uploads'] = $this->get_upload_path();
+		// common data
+		$data['controller'] = "front";
+		$data['url_suffix'] = ".do";
+		// data view
+		$data['dir_uploads'] = $this->get_upload_path();
+		$data['_menu'] = $this->admin;
+		$data['_sub_menu'] = $this->content_management;
+		$data['_title'] = "Login";
+		$data['_org'] = "SMPIT Nurul Fajar";
+		$this->session->unset_userdata();
+		// data model
+		$display = "student";
+		$data['studentviis'] = $this->mdl_student->records(1)->result();
+		$data['studentviiis'] = $this->mdl_student->records(2)->result();
+		$data['studentixs'] = $this->mdl_student->records(3)->result();
+		$data['classes'] = $this->mdl_class->common_records()->result();
+		$this->mdl_common->set_pk("id_city");
+		$this->mdl_common->set_tb("city");
+		$data['cities'] = $this->mdl_common->records()->result();
+		$dataRecord['full_name'] = $this->input->post("full_name");
+		$dataRecord['parent_name'] = $this->input->post("parent_name");
+		$dataRecord['no_jenjang'] = $this->input->post("no_jenjang");
+		$dataRecord['nis'] = $this->input->post("nis");
+		$dataRecord['nisn'] = $this->input->post("nisn");
+		$dataRecord['email'] = $this->input->post("email");
+		$dataRecord['password'] = $this->encrypt->encode($this->input->post("password"));
+		$dataRecord['id_class'] = $this->input->post("id_class");
+		$dataRecord['school_year'] = $this->method->school_year();
+		$dataRecord['is_auser'] = $this->input->post("is_auser");
+		$dataRecord['id_city'] = $this->input->post("id_city");
+		$dataRecord['gender'] = $this->input->post("gender");
+		$dataRecord['born_date'] = $this->method->dateToDatabase($this->input->post("born_date"));
+		$dataRecord['address'] = $this->input->post("address");
+		$dataRecord['desc_user'] = $this->input->post("desc_user");
+		$dataRecordGrade['id_edu'] = $this->input->post("id_edu");
+		$dataRecordGrade['name_grade'] = $this->input->post("name_grade");
+		$dataRecordGrade['grade'] = $this->input->post("grade");
+		$dataRecordGrade['desc_grade'] = $this->input->post("desc_grade");
+		$dataRecordGrade['id_user'] = $this->uri->segment(4);
+		$dataRecordGrade['id_semester'] = $this->uri->segment(5);
+		// validation
+		$this->form_validation->set_rules('full_name', 'Full Name', 'trim|required|min_length[4]|max_length[50]|xss_clean|');
+		$this->form_validation->set_rules('parent_name', 'Parent Name', 'trim|required|min_length[4]|max_length[50]|xss_clean|');
+		$this->form_validation->set_rules('no_jenjang', 'No Jenjang', 'trim|required|min_length[4]|max_length[50]|xss_clean|');
+		$this->form_validation->set_rules('nis', 'NIS', 'trim|required|min_length[4]|max_length[50]|xss_clean|');
+		$this->form_validation->set_rules('nisn', 'NISN', 'trim|required|min_length[4]|max_length[50]|xss_clean|');
+		$this->form_validation->set_rules('born_date', 'Born Date', 'trim|required|min_length[10]|max_length[10]|xss_clean|');
+		$this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[25]|max_length[200]|xss_clean|');
+		$this->form_validation->set_rules('desc_user', 'Description User', 'trim|xss_clean|');
+		$this->form_validation->set_rules('email', 'E-mail', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email|is_unique[user.email]|');
+		$this->form_validation->set_rules('repeat_email', 'Repeat E-mail', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email|matches[email]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[50]|xss_clean');
+		$this->form_validation->set_rules('repeat_password', 'Repeat Password', "trim|xss_clean|matches[password]");
+		$data['errorImage'] = null;
+		$dataUploads['file_name'] = "";
+		$dataRecord['picture_user'] = "";
+		$data['_title_content'] = "Buat " . $data['_title'];
+		$display = "studentCreate";
+		if(isset($_POST['doCreate'])) {
+			$dataUploads = $this->mdl_function->do_upload(100, 100);
+			$data['errorImage'] = $dataUploads['error'];
+			$dataRecord['picture_user'] = $dataUploads['file_name'];
+			if($this->form_validation->run() == TRUE && $data['errorImage'] == null) {
+				$this->mdl_student->save($dataRecord);
+				redirect("front/login");
+			}
+			else $this->method->deleteUserPicture($dataRecord['picture_user']);
+		}
+		$this->load->view('frontend/content/common/register', $data);
+	}
+	
 	public function login() {
 		// path directory
 		$data['dir'] = $this->get_dir();
@@ -106,6 +186,10 @@ class Front extends CI_Controller {
 				$this->form_validation->set_message('email_check', "You'r prohibited to login");
 				return FALSE;
 			}
+			else if($email->is_auser == "0") {
+				$this->form_validation->set_message('email_check', "You'r account isn't approved");
+				return FALSE;
+			}
 		}
 		if(sizeof($emails) == 0) {
 			$this->form_validation->set_message('email_check', "Your %s is not registered");
@@ -122,7 +206,7 @@ class Front extends CI_Controller {
 		$passwords = $this->mdl_login->get_password($email);
 		$passwords = $this->encrypt->decode($passwords);
 		if($passwords != $passwd) {
-			$this->form_validation->set_message('password_check', "Your %s is not match");
+			$this->form_validation->set_message('password_check', "Your %s is miss match");
 			return FALSE;
 		}
 		else {
@@ -152,6 +236,7 @@ class Front extends CI_Controller {
 		$display = "index";
 		// database
 		$this->mdl_review->save($this->method->month_year(), 2);
+		$data['pictures'] = $this->mdl_picture->zero_true_records()->result();
 		$data['our_contacts'] = $this->mdl_comment->rcomment_records(2)->result();
 		$data['sliders'] = $this->mdl_picture->zero_true_records()->result();
 		$data['historys'] = $this->mdl_content->history_records()->result();
@@ -450,7 +535,7 @@ class Front extends CI_Controller {
 		// data view
 		$data['_menu'] = $this->admin;
 		$data['_sub_menu'] = $this->content_management;
-		$data['_title'] = "Fasilitas";
+		$data['_title'] = "Pengumuman";
 		$data['_title_content'] = "Daftar " . $data['_title'];
 		$data['_org'] = "SMPIT Nurul Fajar";
 		$display = "notifications";
@@ -521,7 +606,7 @@ class Front extends CI_Controller {
 		// data view
 		$data['_menu'] = $this->admin;
 		$data['_sub_menu'] = $this->content_management;
-		$data['_title'] = "Fasilitas";
+		$data['_title'] = "Berita Sekolah";
 		$data['_title_content'] = "Daftar " . $data['_title'];
 		$data['_org'] = "SMPIT Nurul Fajar";
 		$display = "newses";
@@ -593,7 +678,7 @@ class Front extends CI_Controller {
 		// data view
 		$data['_menu'] = $this->admin;
 		$data['_sub_menu'] = $this->content_management;
-		$data['_title'] = "Fasilitas";
+		$data['_title'] = "Kegiatan";
 		$data['_title_content'] = "Daftar " . $data['_title'];
 		$data['_org'] = "SMPIT Nurul Fajar";
 		$display = "events";
@@ -664,7 +749,7 @@ class Front extends CI_Controller {
 		// data view
 		$data['_menu'] = $this->admin;
 		$data['_sub_menu'] = $this->content_management;
-		$data['_title'] = "Fasilitas";
+		$data['_title'] = "Artikel";
 		$data['_title_content'] = "Daftar " . $data['_title'];
 		$data['_org'] = "SMPIT Nurul Fajar";
 		$display = "articles";
@@ -1080,7 +1165,7 @@ class Front extends CI_Controller {
 		$this->template->frontendCHTRF('content/common/'.$display, $data);
 	}
 	
-	public function createArticle() {
+	public function createPosting() {
 		// path directory
 		$data['dir'] = $this->get_dir();
 		$data['dir_js'] = $this->get_dir_js();
@@ -1099,10 +1184,20 @@ class Front extends CI_Controller {
 		// data view
 		$data['_menu'] = $this->admin;
 		$data['_sub_menu'] = $this->content_management;
-		$data['_title'] = "Fasilitas";
+		$data['_title'] = "Buat Artikel";
 		$data['_title_content'] = "Daftar " . $data['_title'];
 		$data['_org'] = "SMPIT Nurul Fajar";
 		$display = "articles";
+		// input post article
+		$data['id_content'] = $this->uri->segment(4);
+		$dataRecord['id_tcontent'] = $this->input->post("id_tcontent");
+		$dataRecord['id_rcontent'] = $this->input->post("id_rcontent");
+		$dataRecord['name_content'] = $this->input->post("name_content");
+		$dataRecord['desc_content'] = $this->input->post("desc_content");
+		$dataRecord['is_acontent'] = $this->input->post("is_acontent");
+		$dataRecord['is_dcontent'] = $this->input->post("is_dcontent");
+		$data['errorImage'] = null;
+		$dataRecord['picture_content'] = "";
 		// get data view
 		$dataRecord['id_user'] = $this->input->post("id_user");
 		$dataRecord['id_content'] = $this->input->post("id_content");
@@ -1125,30 +1220,8 @@ class Front extends CI_Controller {
 		$data['archieve_all_records'] = $this->mdl_content->archieve_all_records()->result();
 		$data['right_special_records'] = $this->mdl_content->filter_all_records($this->uri->segment(2))->result();
 		$data['all_contents'] = $this->mdl_content->all_records(0,7)->result();
-		if($data['id_content'] != null && $data['filter'] != null && strlen($data['filter']) == 7) {
-			$data['articles'] = $this->mdl_content->filter_all_records($this->uri->segment(2), $this->uri->segment(4))->result();
-		}
-		else if($data['id_content'] != null) {
-			$display = "articlesRead";
-			$data['articles_nps'] = $this->mdl_content->article_records()->result();
-			$data['articles'] = $this->mdl_content->article_record($data['id_content'])->result();
-			foreach($data['articles'] as $title):$data['_title'] = $title->name_content;endforeach;
-			$data['comments'] = $this->mdl_comment->id_content_records($data['id_content'])->result();
-			$data['count_comments'] = $this->mdl_comment->count_id_content_records($data['id_content']);
-		}
-		$this->form_validation->set_rules('author_comment', 'Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
-		$this->form_validation->set_rules('email_comment', 'Email', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email');
-		$this->form_validation->set_rules('desc_comment', 'Description', 'trim|required|max_length[10000]|xss_clean|');
-		if(isset($_POST['do'])) {
-			if($this->form_validation->run() == TRUE) {
-				$this->mdl_comment->save($dataRecord, 10);
-				redirect("$data[controller]/articles/$dataRecord[id_content]");
-			}
-		}
-		if(isset($_GET['search'])) {
-			$data['articles'] = $this->mdl_content->filter_all_records($this->uri->segment(2),$_GET['search'])->result();
-		}
-		if($dataRecord['parent_comment'] == null) $dataRecord['parent_comment'] = "0";
+		$data['rpost_records'] = $this->mdl_content->rpost_records()->result();
+		
 		// create article
 		if($this->uri->segment(3) == "create") {
 			$data['_title_content'] = "Buat " . $data['_title'];
@@ -1162,7 +1235,7 @@ class Front extends CI_Controller {
 				$dataRecord['picture_content'] = $dataUploads['file_name'];
 				if($this->form_validation->run() == TRUE && $data['errorImage'] == null) {
 					$this->mdl_content->article_save($dataRecord);
-					redirect("admin/article");
+					redirect("front/createPosting");
 				}
 				else $this->method->deleteUserPicture($dataRecord['picture_content']);
 			}
@@ -1171,7 +1244,7 @@ class Front extends CI_Controller {
 		else if($this->uri->segment(3) == "update" && $this->uri->segment(4) != null) {
 			$data['_title_content'] = "Perbaharui " . $data['_title'];
 			$display = "articleUpdate";
-			$data['article_update'] = $this->mdl_content->article_record($data['id_content'])->result();
+			$data['article_update'] = $this->mdl_content->post_record($data['id_content'])->result();
 			$newPicture = "";
 			foreach($data["article_update"] as $article_update) {
 				$oldPicture = $article_update->picture_content;
@@ -1187,69 +1260,22 @@ class Front extends CI_Controller {
 					$data['errorImage'] = $dataUploads['error'];
 					$newPicture = $dataUploads['file_name'];
 					
-		$data['uploads'] = $this->get_upload_path();$dataRecord['picture_content'] = $dataUploads['file_name'];
+				$data['uploads'] = $this->get_upload_path();$dataRecord['picture_content'] = $dataUploads['file_name'];
 				}
 				if($this->form_validation->run() == TRUE && $data['errorImage'] == null) {
 					if(isset($_POST['change_photo'])) $this->method->deleteUserPicture($oldPicture);
 					$this->mdl_content->article_update($dataRecord);
-					redirect("admin/article");
+					redirect("front/createPosting");
 				}
 				else $this->method->deleteUserPicture($newPicture);
 			}
-		}
-		// comment create article
-		else if($this->uri->segment(3) == "commentCreate" && $this->uri->segment(4) != null) {
-			$data['_title_content'] = "Buat Komentar " . $data['_title'];
-			$display = "articleCommentCreate";
-			$data['article_update'] = $this->mdl_content->article_record($data['id_content'])->result();
-			$this->form_validation->set_rules('author_comment', 'Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
-			$this->form_validation->set_rules('email_comment', 'Email', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email');
-			$this->form_validation->set_rules('desc_comment', 'Description', 'trim|required|xss_clean|');
-			if(isset($_POST['doCreate'])) {
-				if($this->form_validation->run() == TRUE) {
-					$this->mdl_comment->save($dataRecord, 8);
-					redirect("admin/article/view/$dataRecord[id_content]");
-				}
-			}
-		}
-		// comment update article
-		else if($this->uri->segment(3) == "commentUpdate" && $this->uri->segment(4) != null && $this->uri->segment(5) != null) {
-			$data['_title_content'] = "Perbaharui Komentar " . $data['_title'];
-			$display = "articleCommentUpdate";
-			$data['article_update'] = $this->mdl_content->article_record($data['id_content'])->result();
-			$data['comments'] = $this->mdl_comment->record($dataRecord['id_comment'])->result();
-			$this->form_validation->set_rules('author_comment', 'Name', 'trim|required|min_length[5]|max_length[50]|xss_clean|');
-			$this->form_validation->set_rules('email_comment', 'Email', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email');
-			$this->form_validation->set_rules('desc_comment', 'Description', 'trim|required|xss_clean|');
-			if(isset($_POST['doCreate'])) {
-				if($this->form_validation->run() == TRUE) {
-					$this->mdl_comment->update($dataRecord);
-					redirect("admin/article/view/$dataRecord[id_content]");
-				}
-			}
-		}
-		// comment delete article
-		else if($this->uri->segment(3) == "commentDelete" && $this->uri->segment(4) != null && $this->uri->segment(5) != null) {
-			$this->mdl_comment->delete($data['id_comment']);
-			redirect("admin/article/view/$dataRecord[id_content]");
-		}
-		else if($this->uri->segment(3) == "view" && $this->uri->segment(4) != null) {
-			$data['_title_content'] = "Detail " . $data['_title'];
-			$display = "articleDetail";
-			$data['articlees'] = $this->mdl_content->article_record($data['id_content'])->result();
-			$data['comments'] = $this->mdl_comment->id_content_records($data['id_content'])->result();
-		}
-		else if($this->uri->segment(3) == "toogle" && $this->uri->segment(4) != null && $this->uri->segment(5) != null) {
-			$status = $this->uri->segment(5);
-			$this->mdl_content->toogle_is_acontent($dataRecord['id_content'], $status);
-			redirect("admin/article");
 		}
 		// delete article
 		else if($this->uri->segment(3) == "delete" && $this->uri->segment(4) != null) {
 			$data['content_record'] = $this->mdl_content->article_record($data['id_content'])->result();
 			foreach($data['content_record'] as $content) $this->method->deleteUserPicture($content->picture_content);
 			$this->mdl_content->article_delete($data['id_content']);
-			redirect("admin/article");
+			redirect("front/createPosting");
 		}
 		
 		$this->template->frontendCHTRF('content/article/'.$display, $data);

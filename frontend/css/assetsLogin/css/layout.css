@@ -203,3 +203,11 @@
 	    font-weight: normal;
 	    font-style: normal; }
 */
+
+.register {
+	position:absolute;margin-left:7%;margin-top:0.5%;text-decoration:none;
+ }
+.register a {
+	text-decoration:none;
+}
+

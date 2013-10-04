@@ -16,7 +16,7 @@
 										<th><center>Nama <?php echo $_title ?> </center></th>
 										<th><center>Penulis</center></th>
 										<th style="width:50%"><center>Link</center></th>
-										<th style="width:12%"><center>Aksi</center></th>
+										<th style="width:5%"><center>Aksi</center></th>
 									</tr>
 								</thead>   
 								<tbody>
@@ -28,9 +28,9 @@
 										<td><?php echo $link->desc_content ?></td>
 										<td class="center">
 											<?php if($this->session->userdata('id_ruser') == 1 || $this->session->userdata('id_ruser') == 2 || $this->session->userdata('id_ruser') == 3 || $this->session->userdata('id_ruser') == 6) {
-													echo ($link->is_acontent == 1)?'<a href="#'.base_url().'admin/link/toogle/'.$link->id_content.'/0" class="btn btn-warning" title="Toogle Active"><i class="icon-ok-circle icon-white"></i></a>':'<a href="#'.base_url().'admin/link/toogle/'.$link->id_content.'/1" class="btn btn-inverse" title="Toogle Active"><i class="icon-remove-circle icon-white"></i></a>'; ; 
+											//		echo ($link->is_acontent == 1)?'<a href="#'.base_url().'admin/link/toogle/'.$link->id_content.'/0" class="btn btn-warning" title="Toogle Active"><i class="icon-ok-circle icon-white"></i></a>':'<a href="#'.base_url().'admin/link/toogle/'.$link->id_content.'/1" class="btn btn-inverse" title="Toogle Active"><i class="icon-remove-circle icon-white"></i></a>'; ; 
 													echo '<a href="#'.base_url().'admin/link/update/'.$link->id_content.'" class="btn btn-info" title="Perbaharui"><i class="icon-pencil icon-white"></i></a>'; 
-													echo '<a href="#'.base_url().'admin/link/delete/'.$link->id_content.'" class="btn btn-danger" title="Hapus" onClick="return confirm(\'Anda yakin ingin menghapus '. $link->name_content  . ' ?\')"><i class="icon-trash icon-white"></i></a>'; 
+											//		echo '<a href="#'.base_url().'admin/link/delete/'.$link->id_content.'" class="btn btn-danger" title="Hapus" onClick="return confirm(\'Anda yakin ingin menghapus '. $link->name_content  . ' ?\')"><i class="icon-trash icon-white"></i></a>'; 
 												}
 											?>
 										</td>
@@ -38,7 +38,7 @@
 									<?php } ?>
 								</tbody>
 							</table>
-							<?php echo '
+							<?php /* echo '
 								<a href="#'.base_url().'admin/link/create" title="Buat Baru">
 									<div class="bottom-table-1">
 										<button class="btn btn-large btn-primary">
@@ -46,7 +46,7 @@
 										</button>
 									</div>
 								</a>
-								'; 
+								'; */
 							?>
 							<!-- create end -->
 						</div>

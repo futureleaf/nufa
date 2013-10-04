@@ -10,7 +10,7 @@
 		  
 	      
 		  
-				<div class="holder" style="float:right"></div><br/><br/><br/><br/>
+				<div class="holder" style="float:right"></div>
 				<!--///////////////////////////////BEGINNING POST WITH PHOTO//////////////////////////////////////-->
 				<ul id="itemContainer">
 				<?php
@@ -25,7 +25,7 @@
 				?>
 					<li>
 						<div class="photos-blog"><!--beginning photos-blog--> 
-							<?php echo anchor("$controller/$link/$facility->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$facility->picture_content .'" style="width:650px;height:300px;margin-bottom:20px;" alt="">'); ?>
+							<?php echo anchor("$controller/$link/$facility->id_content", '<span class="roll-img-blog"></span><img src="'. $dir_uploads.$facility->picture_content .'" class="img-content" alt="">'); ?>
 							<div class="intro-text-blog"><!--beginning intro-text-blog-->
 							  
 							  <?php echo anchor("$controller/$link/$facility->id_content", '<h3 class="title-three-4"><span>'.$facility->name_content.' </span></h3>'); ?>
