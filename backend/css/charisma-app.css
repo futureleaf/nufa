@@ -254,8 +254,8 @@ margin-left:15px;
 }
 .thumbnail img,.thumbnail > a{
 z-index:2;
-height:100px;
-width:100px;
+height:60px;
+width:154px;
 position:relative;
 display: block;
 }

@@ -19,7 +19,7 @@
 									<label class="control-label" for="typeahead">Gambar Utama </label>
 									<div class="controls">
 										<input class="input-file uniform_on" type="file" name="userfile" size="20" />
-										<?php if($errorImage != null) echo "<span class=\"help-inline\"> " . $errorImage . " </span>"; ?>
+										(1280px X 500px) <?php if($errorImage != null) echo "<span class=\"help-inline\"> " . $errorImage . " </span>"; ?>
 									</div>
 								</div>
 								<div class="form-actions">

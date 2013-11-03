@@ -15,14 +15,14 @@
 											?>
 													<input type="hidden" name="id_class" value="<?php echo $this->uri->segment(4); ?>" />
 													<div class="control-group <?php if(form_error('full_name') != null) echo"error" ?>">
-														<label class="control-label">Nama <?php echo $_title; ?> </label>
+														<label class="control-label">Nama Lengkap </label>
 														<div class="controls">
 															<input type="text" style="width:30.5%" name="full_name" value="<?php echo (set_value('full_name'))?set_value('full_name'):""; ?>" />
 															<?php if(form_error('full_name') != null) echo "<span class=\"help-inline\"> " . form_error('full_name') . " </span>"; ?>
 														</div>
 													</div>
 													<div class="control-group <?php if(form_error('parent_name') != null) echo"error" ?>">
-														<label class="control-label">Nama Orang Tua <?php echo $_title; ?> </label>
+														<label class="control-label">Nama Orang Tua </label>
 														<div class="controls">
 															<input type="text" style="width:30.5%" name="parent_name" value="<?php echo (set_value('parent_name'))?set_value('parent_name'):""; ?>" />
 															<?php if(form_error('parent_name') != null) echo "<span class=\"help-inline\"> " . form_error('parent_name') . " </span>"; ?>
@@ -128,7 +128,7 @@
 														</div>
 													</div>
 													<div class="control-group <?php if(form_error('desc_user') != null) echo"error" ?>">
-														<label class="control-label">Deskripsi <?php echo $_title; ?> </label>
+														<label class="control-label">Deskripsi Pengguna </label>
 														<div class="controls">
 															<textarea class="cleditor" rows="3" name="desc_user"><?php echo (set_value('desc_user'))?set_value('desc_user'):""; ?></textarea>
 															<?php if(form_error('desc_user') != null) echo "<span class=\"help-inline\"> " . form_error('desc_user') . " </span>"; ?>

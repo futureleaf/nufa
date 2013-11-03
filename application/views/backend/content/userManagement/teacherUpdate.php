@@ -132,14 +132,6 @@
 															?>
 														</div>
 													</div>
-													<?php
-														if($teacher->id_ruser == 2) {
-													?>
-													<input type="hidden" name="id_ruser" value="2" />
-													<?php
-														}
-														else {
-													?>
 													<div class="control-group">
 														<label class="control-label">Sebagai Pegawai</label>
 														<div class="controls">
@@ -150,9 +142,6 @@
 															?>
 														</div>
 													</div>
-													<?php
-														}
-													?>
 													<div class="control-group <?php if(form_error('born_date') != null) echo"error" ?>">
 														<label class="control-label">Tanggal Lahir </label>
 														<div class="controls">

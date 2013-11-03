@@ -9,7 +9,7 @@
         
         <div class="spot-blog"><!--beginning spot-blog-->
         <?php
-		if($this->uri->segment(2) == "gallery" || $this->uri->segment(2) == "history" || $this->uri->segment(2) == "visionAndMision") {
+		if($this->uri->segment(2) == "gallery" || $this->uri->segment(2) == "history" || $this->uri->segment(2) == "visionAndMision" || $this->uri->segment(2) == "createPosting") {
 			$function = "archieves";
 		}
 		else {
@@ -17,8 +17,9 @@
 		}
         ?>
         <form class="search-post" action="<?= base_url().$controller."/".$function?>" method="get">
-        <fieldset> <span class="text"><input name="search" type="text" value="" placeholder="Search ..."></span>
-        </fieldset>
+			<fieldset> 
+				<span class="text"><input name="search" type="text" value="" placeholder="Search ..."></span>
+			</fieldset>
         </form>
           <h3 class="title-three-4"><span>Latest Post</span></h3>
           <ul>
@@ -29,6 +30,7 @@
 			else if($all_content->id_rcontent == 4) $link = "facilitys";
 			else if($all_content->id_rcontent == 5) $link = "notifications";
 			else if($all_content->id_rcontent == 6) $link = "events";
+			else $link = "archieves";
 		echo "<li>" . anchor("$controller/$link/" . $all_content->id_content, $all_content->name_content) . "</li>";
 		endforeach; ?>
           </ul>
@@ -46,11 +48,7 @@
 	      <li><?php echo anchor("$controller/notifications","Pengumuman", array("title"=>"Pengumuman")); ?></li>
 	      <li><?php echo anchor("$controller/newses","Berita Sekolah", array("title"=>"Berita Sekolah")); ?></li>
 	      <li><?php echo anchor("$controller/events","Kegiatan", array("title"=>"Kegiatan")); ?></li>
-	      <li><?php echo anchor("$controller/articles","Artikel", array("title"=>"Artikel")); ?>
-			  <ul>
-				<li><?php echo anchor("$controller/archieves","Islami", array("title"=>"Islami")); ?></li>
-			  </ul>
-		  </li>
+	      <li><?php echo anchor("$controller/articles","Artikel", array("title"=>"Artikel")); ?></li>
 	      <li><?php echo anchor("$controller/facilitys","Fasilitas", array("title"=>"Fasilitas")); ?></li>
 	      <li><?php echo anchor("$controller/achievements","Prestasi", array("title"=>"Prestasi")); ?></li>
           </ul>

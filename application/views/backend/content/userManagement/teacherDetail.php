@@ -33,7 +33,7 @@
 													<div class="control-group">
 														<label class="control-label">Gambar </label>
 														<div class="controls">
-															<p><img src="<?php echo base_url() . $uploads . "/thumbs/thumb_" . $teacher->picture_user; ?>" /></p>
+															<p><img src="<?php echo $uploads . "/thumbs/thumb_" . $teacher->picture_user; ?>" /></p>
 														</div>
 													</div>
 													<div class="control-group">

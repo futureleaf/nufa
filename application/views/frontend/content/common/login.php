@@ -54,6 +54,7 @@
 				<h2>Login</h2>
 				<p><input name='email' type="text" placeholder="email" value='<?php echo (set_value('email'))?set_value('email'):""; ?>'></p>
 				<p><input name='password' type="password" placeholder="password" value=''></p>
+				<div class="register"><?php echo anchor("$controller/register", "Daftar Menjadi Siswa"); ?></div>
 				<button name='do' type="submit"></button>
 			<form>
 		</div>

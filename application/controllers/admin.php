@@ -136,7 +136,7 @@ class Admin extends CI_Controller {
 		$passwords = $this->mdl_login->get_password($email);
 		$passwords = $this->encrypt->decode($passwords);
 		if($passwords != $passwd) {
-			$this->form_validation->set_message('password_check', "Your %s is not match");
+			$this->form_validation->set_message('password_check', "Your %s is miss match");
 			return FALSE;
 		}
 		else {
@@ -300,7 +300,7 @@ class Admin extends CI_Controller {
 				$dataRecord['picture_user'] = $dataUploads['file_name'];
 				if($this->form_validation->run() == TRUE && $data['errorImage'] == null) {
 					$this->mdl_teacher->save($dataRecord);
-					//redirect("admin/teacher");
+					redirect("admin/teacher");
 				}
 				else {
 					$this->method->deleteUserPicture($dataRecord['picture_user']);
@@ -440,7 +440,7 @@ class Admin extends CI_Controller {
 				if(isset($_POST['doCreate'])) {
 					if($this->form_validation->run() == TRUE) {
 							$this->mdl_grade->saves($dataRecordGrade);
-							//redirect("admin/teacher/grade/$data[id_user]/$data[id_semester]");
+							redirect("admin/teacher/grade/$data[id_user]/$data[id_semester]");
 					}
 				}
 				$display = "teacherGradeCreate";
@@ -561,8 +561,6 @@ class Admin extends CI_Controller {
 				$this->form_validation->set_rules('repeat_email', 'Repeat E-mail', 'trim|required|min_length[5]|max_length[50]|xss_clean|valid_email|matches[email]');
 				$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[50]|xss_clean');
 				$this->form_validation->set_rules('repeat_password', 'Repeat Password', "trim|xss_clean|matches[password]");
-				$dataUploads['file_name'] = "";
-				$dataRecord['picture_user'] = "";
 				$dataUploads = $this->mdl_function->do_upload(100, 100);
 				$data['errorImage'] = $dataUploads['error'];
 				$dataRecord['picture_user'] = $dataUploads['file_name'];
@@ -2167,7 +2165,7 @@ class Admin extends CI_Controller {
 			if(isset($_POST['doUpdate'])) {
 				if($this->form_validation->run() == TRUE) {
 					$this->mdl_content->gallery_update($dataRecord);
-					//redirect("admin/gallery");
+					redirect("admin/gallery");
 				}
 			}
 		}
@@ -2187,7 +2185,7 @@ class Admin extends CI_Controller {
 				$dataRecord['name_picture'] = $dataUploads['file_name'];
 				if($data['errorImage'] == null) {
 					$this->mdl_picture->id_content_save($dataRecord);
-					//redirect("admin/gallery/picture/$dataRecord[id_content]");
+					redirect("admin/gallery/picture/$dataRecord[id_content]");
 				}
 			}
 		}
