@@ -1,8 +1,11 @@
-<!doctype html>
+
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> 	<html lang="en"> <!--<![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> 	
+
+<html lang="en"> <!--<![endif]-->
+	<!DOCTYPE html>
 <head>
 
 	<!-- General Metas -->
@@ -32,61 +35,59 @@
 	text-align:center;
 }
 </style>
+	<link rel="stylesheet" href="<?php echo base_url();?>frontend/css/assetsReg/style.css">
+	
+</head>
 <body>
 	<fieldset>			
 		<?php
 		// untuk craete
 			echo form_open_multipart("", array("class"=>"form-horizontal"));
 		?>
+			<h2>Register</h2>
+		<div id='content'>
 				<input type="hidden" name="id_class" value="<?php echo $this->uri->segment(4); ?>" />
 				<input type="hidden" name="is_auser" value="0" />
 				<input type="hidden" name="no_jenjang" value="0000" />
 				<input type="hidden" name="desc_user" value="-" />
 				<div class="control-group <?php if(form_error('full_name') != null) echo"error" ?>">
-					<label class="control-label">Nama Lengkap </label>
-					<div class="controls">
-						<input type="text" style="width:30.5%" name="full_name" value="<?php echo (set_value('full_name'))?set_value('full_name'):""; ?>" />
 						<?php if(form_error('full_name') != null) echo "<span class=\"help-inline\"> " . form_error('full_name') . " </span>"; ?>
+					<div class="controls">
+						<input type="text" placeholder='Nama Lengkap' name="full_name" value="<?php echo (set_value('full_name'))?set_value('full_name'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('parent_name') != null) echo"error" ?>">
-					<label class="control-label">Nama Orang Tua  </label>
-					<div class="controls">
-						<input type="text" style="width:30.5%" name="parent_name" value="<?php echo (set_value('parent_name'))?set_value('parent_name'):""; ?>" />
 						<?php if(form_error('parent_name') != null) echo "<span class=\"help-inline\"> " . form_error('parent_name') . " </span>"; ?>
+					<div class="controls">
+						<input type="text" placeholder='Nama Orang Tua' name="parent_name" value="<?php echo (set_value('parent_name'))?set_value('parent_name'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('email') != null) echo"error" ?>">
-					<label class="control-label">Email </label>
-					<div class="controls">
-						<input type="email" style="width:30.5%" name="email" value="<?php echo (set_value('email'))?set_value('email'):""; ?>" />
 						<?php if(form_error('email') != null) echo "<span class=\"help-inline\"> " . form_error('email') . " </span>"; ?>
+					<div class="controls">
+						<input type="email" placeholder='Email' name="email" value="<?php echo (set_value('email'))?set_value('email'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('repeat_email') != null) echo"error" ?>">
-					<label class="control-label">Ulangi Email </label>
-					<div class="controls">
-						<input type="email" style="width:30.5%" name="repeat_email" value="<?php echo (set_value('repeat_email'))?set_value('repeat_email'):""; ?>" />
 						<?php if(form_error('repeat_email') != null) echo "<span class=\"help-inline\"> " . form_error('repeat_email') . " </span>"; ?>
+					<div class="controls">
+						<input type="email" placeholder='Ulangi Email' name="repeat_email" value="<?php echo (set_value('repeat_email'))?set_value('repeat_email'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('password') != null) echo"error" ?>">
-					<label class="control-label">Kata Sandi </label>
-					<div class="controls">
-						<input type="password" style="width:30.5%" name="password" value="<?php echo (set_value('password'))?set_value('password'):""; ?>" />
 						<?php if(form_error('password') != null) echo "<span class=\"help-inline\"> " . form_error('password') . " </span>"; ?>
+					<div class="controls">
+						<input type="password" placeholder='Kata Sandi' name="password" value="<?php echo (set_value('password'))?set_value('password'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('repeat_password') != null) echo"error" ?>">
-					<label class="control-label">Ulangi Kata Sandi </label>
-					<div class="controls">
-						<input type="password" style="width:30.5%" name="repeat_password" value="<?php echo (set_value('repeat_password'))?set_value('repeat_password'):""; ?>" />
 						<?php if(form_error('repeat_password') != null) echo "<span class=\"help-inline\"> " . form_error('repeat_password') . " </span>"; ?>
+					<div class="controls">
+						<input type="password" placeholder='Ulangi Kata Sandi' name="repeat_password" value="<?php echo (set_value('repeat_password'))?set_value('repeat_password'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Kelas</label>
-					<div class="controls">
+					<div class="controls" placeholder='Kelas'>
 						<?php
 							foreach($classes as $class) {$classs["$class->id_class"] = $class->name_class;}
 							echo form_dropdown("id_class", $classs, '', 'data-rel="chosen"'); 
@@ -94,21 +95,18 @@
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('nis') != null) echo"error" ?>">
-					<label class="control-label">Nomer Induk Siswa</label>
-					<div class="controls">
-						<input type="text" style="width:30.5%" name="nis" value="<?php echo (set_value('nis'))?set_value('nis'):""; ?>" />
 						<?php if(form_error('nis') != null) echo "<span class=\"help-inline\"> " . form_error('nis') . " </span>"; ?>
+					<div class="controls">
+						<input type="text" placeholder='Nomer Induk Siswa' name="nis" value="<?php echo (set_value('nis'))?set_value('nis'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('nisn') != null) echo"error" ?>">
-					<label class="control-label">Nomer Induk Siswa Nasional</label>
-					<div class="controls">
-						<input type="text" style="width:30.5%" name="nisn" value="<?php echo (set_value('nisn'))?set_value('nisn'):""; ?>" />
 						<?php if(form_error('nisn') != null) echo "<span class=\"help-inline\"> " . form_error('nisn') . " </span>"; ?>
+					<div class="controls">
+						<input type="text" placeholder='Nomer Induk Siswa Nasional' name="nisn" value="<?php echo (set_value('nisn'))?set_value('nisn'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Kota</label>
 					<div class="controls">
 						<?php 
 							foreach($cities as $city) {$citieses["$city->id_city"] = $city->name_city;}
@@ -117,14 +115,13 @@
 					</div>
 				</div>
 				<div class="control-group <?php if($errorImage != null) echo"error" ?>">
+						<?php if($errorImage != null) echo "<span class=\"help-inline\"> " . $errorImage . " </span>"; ?>
 					<label class="control-label">Foto </label>
 					<div class="controls">
-						<input type="file" name="userfile" value="" />
-						<?php if($errorImage != null) echo "<span class=\"help-inline\"> " . $errorImage . " </span>"; ?>
+						<input type="file" placeholder='Foto' name="userfile" value="" />
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label">Jenis Kelamin</label>
 					<div class="controls">
 						<?php
 							$genders['1'] = "Laki-laki";
@@ -134,17 +131,17 @@
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('born_date') != null) echo"error" ?>">
-					<label class="control-label">Tanggal Lahir (MM/DD/YYYY)</label>
-					<div class="controls">
-						<input class="datepicker" type="text" style="width:30.5%" name="born_date" value="<?php echo (set_value('born_date'))?set_value('born_date'):""; ?>" />
 						<?php if(form_error('born_date') != null) echo "<span class=\"help-inline\"> " . form_error('born_date') . " </span>"; ?>
+					<label class="control-label" placeholder='Nama Orang Tua'> </label>
+					<div class="controls">
+						<input class="datepicker" type="text" placeholder='Tanggal Lahir (MM/DD/YYYY)' name="born_date" value="<?php echo (set_value('born_date'))?set_value('born_date'):""; ?>" />
 					</div>
 				</div>
 				<div class="control-group <?php if(form_error('address') != null) echo"error" ?>">
-					<label class="control-label">Alamat </label>
-					<div class="controls">
-						<textarea rows="3" name="address"><?php echo (set_value('address'))?set_value('address'):""; ?></textarea>
 						<?php if(form_error('address') != null) echo "<span class=\"help-inline\"> " . form_error('address') . " </span>"; ?>
+					<label class="control-label" placeholder='Nama Orang Tua'> </label>
+					<div class="controls">
+						<textarea rows="3" placeholder='Alamat' name="address"><?php echo (set_value('address'))?set_value('address'):""; ?></textarea>
 					</div>
 				</div>
 				<div class="form-actions">
